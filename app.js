@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const crypto = require("crypto");
 const memory = require("memory");
 const flash = require("connect-flash");
+const queryDB = require('./database/query');
 
 
 const app = express();
@@ -27,15 +28,10 @@ app.use(session({secret:"max", saveUninitialized:false,resave:false}))
 const server = app.listen(3000, (err) => {
     if(err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
+    queryDB.getData('name', 1);
+    queryDB.storeData('name password email bio interest state city sex join_date session_id socket_id user_id', "'name'  '98835' 'alex@student.org' 'Hello_World' 'Science' 'NJ' 'Teaneck' 'M' NOW() 'sadsad' 123456 NULL", "users");
+    queryDB.storeData()
 })
-
-
-const connection = mysql.createConnection({
-    host     : '10.67.71.7',
-    user     : 'root',
-    password : '98835Piggy98835!',
-    database : 'students'
-  });
 
 const io = socket(server);
 
