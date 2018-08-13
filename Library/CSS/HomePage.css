@@ -1,0 +1,137 @@
+/*Nav Bar (1-27)*/
+.navbar-brand img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+#yurr{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+/* .container-fluid{
+    background: black; */
+.form-group{
+    display: inline;
+}
+  .navbar{
+    padding: 0.8rem;
+    width: 100%;
+  }
+  .navbar-nav li{
+    padding-right: 20px;
+    width: 100%;
+  }
+  .nav-link{
+    font-size: 1.1em !important;
+  }
+  .navbar-brand{
+      height: 100%;
+  }
+/*end of navbar*/
+
+#images{
+    display: flex;
+    justify-content: space-around;
+}
+
+#collab{
+    height: 300px;
+}
+
+#study{
+    height: 300px;
+}
+
+#learn{
+    height: 300px;
+}
+
+#imagesText{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#collabText{
+    width: 300px;
+}
+
+#studyText{
+    width: 300px;
+}
+
+#learnText{
+    width: 300px;
+}
+
+#bigImage > .jumbotron > img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+#signUp{
+    display: flex;
+    height: 300px;
+    justify-content: center;
+}
+
+#signUp > button {
+    height: 50px;
+    align-self: center;
+}
+.social a{
+    font-size: 4.5em;
+    padding: 3rem;
+  
+  }
+  .fa-facebook{
+    color: black;
+  }
+  .fa-twitter{
+    color: #263238;
+  }
+  .fa-instagram{
+    color: black;
+  }
+  .fa-linkedin{
+    color: black;
+  }
+  .fa-google-plus{
+    color: black;
+  }
+  .fa-github{
+    color: black;
+  }
+  .fa-instagram:hover, .fa-twitter:hover, .fa-facebook:hover,
+   .fa-linkedin:hover,.fa-github:hover,.fa-google-plus:hover{
+     color:goldenrod;
+  }
+  footer{
+    background-color: #263238;
+    color: whitesmoke;
+    padding: 2rem;
+  }
+  hr.light{
+    border-top: 2px solid black;
+    width: 75%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+  }
+  footer a{
+    color: aqua;
+  }
+  hr.light-100{
+    border-top: 1px solid black;
+    width: 100%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+  }
+  /*---Media Queries --*/
+  @media (max-width: 992px) {
+    .social a {
+      font-size: 4em;
+      padding: 2rem;
+    }
+  
+    }

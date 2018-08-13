@@ -1,0 +1,179 @@
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 14%; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    left: 0;
+
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    font-family: Ranga;
+    font-size: 25px;
+    color: black;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: red;
+}
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+hr{
+    border-color: black;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.form-control{
+    position: relative;
+    bottom: -14px;
+    border: 3px solid;
+}
+#yo{
+    width: 40px;
+    height: 40px;
+}
+
+/* message*/
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Gudea:700');
+/* GOOGLE FONTS */
+
+/* font-family: 'Fredericka the Great', cursive; */
+
+/* font-family: 'Gudea', sans-serif; */
+
+/* COLOR PALETTE */
+
+/* https://coolors.co/36151e-839791-593f62-e3b23c-edebd7 */
+
+:root {
+    --primaryDark: #36151E;
+    --primaryLight: #EDEBD7;
+    --accent: #E3B23C;
+    --alternate: #593F62;
+    --addedPadding: 10px;
+}
+
+ .allMessages {
+    margin: auto;
+    height: 100vh;
+ }
+
+#submitButton {
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+input,
+.allMessages>p {
+    font-family: sans-serif;
+}
+.allMessages {
+    flex: 1;
+    margin-top: 15px;
+    width: 1052px;
+    position: fixed;
+    position: relative;
+    right: -39px;
+    top: -16px;
+    padding: var(--addedPadding);
+    border-right: 2em solid black;
+    border-left: 2em solid black;
+    border-top: 2em solid black;
+    background-color: white;
+    color: var(--alternate);
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-gap: 5px;
+}
+
+.allMessages>p {
+    text-indent: -2em;
+    margin-left: 2em;
+}
+
+.userContainer {
+    margin: auto;
+    width: 1052px;
+    border: 2px solid black;
+    background-color: var(--primaryLight);
+    position: relative;
+    right: -39px;
+    top: -16px;
+    
+}
+
+label {
+    font-size: 1.3em;
+    color: var(--primaryDark);
+}
+
+input {
+    font-size: 1.3em;
+    background: none;
+    border: unset;
+    border-bottom: var(--alternate) 2px solid;
+    caret-color: var(--accent);
+    color: var(--alternate);
+}
+
+input:focus {
+    outline: none;
+}
+
+.userContainer {
+    padding: var(--addedPadding);
+}
+
+form,
+.inputContainer,
+.singleInput {
+    display: grid;
+    grid-gap: var(--addedPadding);
+}
+
+form {
+    grid-template: auto/1fr auto;
+}
+
+.inputContainer {
+    grid-template: auto auto/auto;
+}
+
+.singleInput {
+    grid-template: auto/auto 1fr;
+}
+
+#submitButton {
+    color: var(--primaryDark);
+    background-color: var(--accent);
+    font-size: 1.3em;
+    transition: color 300ms ease-in, background-color 300ms ease-in;
+    cursor: pointer;
+}
+
+#submitButton:hover {
+    background-color: var(--primaryDark);
+    color: var(--accent);
+}
+
+#submitButton:focus {
+    outline-style: none;
+    outline-width: 2px;
+    outline-color: var(--primarydark);
+}
+.navbar navbar-light bg-light sticky-top{
+    border: 3em solid;
+}
