@@ -79,3 +79,19 @@ exports.storeData = (data, inputData, table) => {
         console.log(results);
     })
 }
+
+exports.changeData = (dataToChange, newData, table) => {
+    
+}
+
+
+exports.getId = (password, name, userId) => {
+    let search = "user_id";
+    let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;
+
+    console.log(sql);
+    connection.query(sql, function(err, results){
+        if(err) throw err;
+        console.log(results);
+    })
+}

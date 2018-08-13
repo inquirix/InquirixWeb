@@ -30,13 +30,11 @@ app.use(session({secret:"max", saveUninitialized:false,resave:false}))
 const server = app.listen(3000, (err) => {
     if(err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
-    queryDB.getData('name', 1);
-    queryDB.storeData('name password email bio interest state city sex join_date session_id socket_id user_id', "'name'  '98835' 'alex@student.org' 'Hello_World' 'Science' 'NJ' 'Teaneck' 'M' NOW() 'sadsad' 123456 NULL", "users");
-    queryDB.storeData()
+    queryDB.getId('12345!', 'John');
 })
 
 
-const io = socket(server);
+// const io = socket(server);
 
 // var store = new BetterMemoryStore({ expires: 60 * 60 * 1000, debug: true });
 // app.use(sess({
@@ -85,7 +83,6 @@ passport.deserializeUser(function(id, done){
         done(err, rows[0]);
     });
 });
-
 
 const connection = mysql.createConnection({
     host     : '10.67.71.7',
