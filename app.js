@@ -2,9 +2,13 @@ const mysql = require('mysql');
 const express = require('express');
 const validator = require('express-validator');
 const bodyParser = require('body-parser');
-const session = require('express-session')
+const session = require('express-session');
 const socket = require('socket.io');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const crypto = require("crypto");
+const memory = require("memory");
+const flash = require("connect-flash");
+
 
 const app = express();
 
