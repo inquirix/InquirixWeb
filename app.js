@@ -45,6 +45,20 @@ const server = app.listen(3000, (err) => {
         console.log(data);
     });
 
+    //testing storeData funtion (should send an Okpacket to DB and log "done")
+    queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
+        console.log("done");
+    })
+
+    //Testing changeData function (should send an Okpacket to DB and log "done")
+    queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
+        console.log('done');
+    })
+
+    queryDB.getId("'98835'", "'Dale'").then((data) => {
+        console.log(data);
+    })
+
     
 
 })

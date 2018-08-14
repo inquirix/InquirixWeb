@@ -44,54 +44,66 @@ exports.getData = (data, userId) => {
  * @param table The that you want to add the data to
  * 
  * @description This function will access the database and input data into it
- * @example storeData('name email password user_id', ("'Jeremy' 'jsbparson@gmail.com' '12345' 609"))
+ * @example storeData('name email password user_id', "'Jeremy' 'jsbparson@gmail.com' '12345' 609", "users"))
  */
 
 exports.storeData = (data, inputData, table) => {
-    let store = data.split(" ");
-    let inputDataArr = inputData.split(" ");
-    let columns = [];
-    let columnsStr = "";
-    let dataarr = [];
-    let inputDataStr = "";
-
-    for(let vars of store){
-        if(vars == store[store.length - 1]){
-            columns.push(`${vars}`)
-        }else{
-            columns.push(`${vars},`)
-        }
-    }
-
-    columns[0] = "(" + columns[0];
-    columns[columns.length - 1] += ")"
-
-    for(let column of columns){
-        columnsStr += column + " ";
-    }
-
-    for(let data of inputDataArr){
-        if(data == inputDataArr[inputDataArr.length - 1]){
-            dataarr.push(`${data}`);
-        }else{
-            dataarr.push(`${data},`);
-        }
-    }
-
-    dataarr[0] = "(" + inputDataArr[0];
-    dataarr[inputDataArr.length - 1] += ")";
+    return new Promise((res, rej) => {
+        let store = data.split(" ");
+        let inputDataArr = inputData.split(" ");
+        let columns = [];
+        let columnsStr = "";
+        let dataarr = [];
+        let inputDataStr = "";
     
-    for(let data of dataarr){
-        inputDataStr += data + " ";
-    }
-
-    let sql = `INSERT INTO ${table} ${columnsStr}VALUES ${inputDataStr} `
-    console.log(sql);
-
-    connection.query(sql, function(err, results){
-        if(err) throw err;
-        console.log(results);
+        for(let vars of store){
+            if(vars == store[store.length - 1]){
+                columns.push(`${vars}`)
+            }else{
+                columns.push(`${vars},`)
+            }
+        }
+    
+        columns[0] = "(" + columns[0];
+        columns[columns.length - 1] += ")"
+    
+        for(let column of columns){
+            columnsStr += column + " ";
+        }
+    
+        for(let data of inputDataArr){
+            if(data == inputDataArr[inputDataArr.length - 1]){
+                dataarr.push(`${data}`);
+            }else{
+                dataarr.push(`${data},`);
+            }
+        }
+    
+        dataarr[0] = "(" + inputDataArr[0];
+        dataarr[inputDataArr.length - 1] += ")";
+        
+        for(let data of dataarr){
+            inputDataStr += data + " ";
+        }
+    
+        let sql = `INSERT INTO ${table} ${columnsStr}VALUES ${inputDataStr} `
+        console.log(sql);
+        
+        let queryDB = () => {
+            return new Promise((res, rej) => {
+                connection.query(sql, function(err, results){
+                    if(err) throw err;
+                    console.log(results);
+                    res();
+                })
+            })
+        }
+        
+        queryDB().then(() => {
+            res(true)
+        });
     })
+    
 }
 
 /**
@@ -104,27 +116,39 @@ exports.storeData = (data, inputData, table) => {
  */
 
 exports.changeData = (dataToChange, newData, condition, table) => {
-    let varsArr = dataToChange.split(" ");
-    let newerData = newData.split(" ");
-    let varsStr = "";
-    let i = 0;
-
-    for(let vars of varsArr){
-        if(vars == varsArr[varsArr.length - 1]){
-            varsStr += `${vars} = ${newerData[i]}`
-        }else{
-            varsStr += `${vars} = ${newerData[i]}, `
-        }
-        i++;
-    }
+    return new Promise((res, rej) => {
+        let varsArr = dataToChange.split(" ");
+        let newerData = newData.split(" ");
+        let varsStr = "";
+        let i = 0;
     
+        for(let vars of varsArr){
+            if(vars == varsArr[varsArr.length - 1]){
+                varsStr += `${vars} = ${newerData[i]}`
+            }else{
+                varsStr += `${vars} = ${newerData[i]}, `
+            }
+            i++;
+        }
+        
+    let queryDB = () => {
+        return new Promise((res, rej) => {
+            let sql = `UPDATE ${table} SET ${varsStr} WHERE ${condition}`
+            console.log(sql);
+            connection.query(sql, function(err, results){
+                if(err) throw err;
+                console.log(results);
+                res();
+            })
+        })
+    }
 
-    let sql = `UPDATE ${table} SET ${varsStr} WHERE ${condition}`
-    console.log(sql);
-    connection.query(sql, function(err, results){
-        if(err) throw err;
-        console.log(results);
+    queryDB().then(() => {
+        res(true);
     })
+        
+    })
+    
 }
 
 /**
@@ -135,13 +159,27 @@ exports.changeData = (dataToChange, newData, condition, table) => {
  */
 
 exports.getId = (password, name) => {
-    let search = "user_id";
-    let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;
+    return new Promise((res, rej) => {
+        let search = "user_id";
+        let sql = `SELECT ${search} FROM users WHERE name = ${name} AND password = ${password}`;
+    
+        console.log(sql);
 
-    console.log(sql);
-    connection.query(sql, function(err, results){
-        if(err) throw err;
-        console.log(results);
+        let queryDB = () => {
+            return new Promise((res, rej) => {
+                connection.query(sql, function(err, results){
+                    if(err) throw err;
+                    console.log(results);
+                    res(results[0].user_id);
+                })
+            })
+            
+        }
+
+        queryDB().then((data) => {
+            res(data)
+        })
+        
     })
 }
 
