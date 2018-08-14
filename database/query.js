@@ -95,7 +95,7 @@ exports.storeData = (data, inputData, table) => {
             return new Promise((res, rej) => {
                 connection.query(sql, function(err, results) {
                     if (err) throw err;
-                    console.log(results);
+                    // console.log(results);
                     res();
                 })
             })
@@ -221,5 +221,38 @@ exports.verifyUser = (password, email) => {
         }
 
         queryDB().then(returnData);
+    })
+}
+
+exports.verifyEmail = (email) => {
+        return new Promise((res, rej) => {
+        let exists = false;
+        console.log('I ran');
+
+        let search = "user_id";
+
+        let sql = `SELECT ${search} FROM users WHERE email = '${email}'`;
+
+        
+
+        let queryDB = () => {
+            return new Promise((res, req) => {
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
+                    if (results[0] === undefined) {
+                        console.log(results);
+                        exists = false;
+                    } else {
+                        exists = true;
+                    }
+                    res();
+                })
+            })
+        }
+
+        queryDB().then(() => {
+            res(exists);
+        });
+         
     })
 }

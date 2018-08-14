@@ -137,27 +137,34 @@ app.post("/submit", (req, res) => {
     req.check('email', 'Invalid Email Address').isEmail();
     req.check('password', 'Password is invalid').isLength({min:6}).equals(req.body.cpassword)
 
-    var errors = req.validationErrors();
-    if(errors){
-        req.session.errors = [];
-        req.session.errors = errors;
-        for(let error of errors){
-            errorArr.push(error['msg']);
-        }
-        console.log(errorArr + " " + req.sessionID);
-        console.log(req.body.password + " " + req.body.cpassword + ".")
-        req.session.errorArr = errorArr;
-        
-            res.redirect('/');
-        
-    }else{
-        queryDB.storeData('name password email join_date user_id', `'${req.body.name}'  '${req.body.password}' '${req.body.email}' NOW() NULL`, 'users').then(() => {
-            console.log("done");
-            }).then(() => {
+    queryDB.verifyEmail(req.body.email).then((data) => {
+        var errors = req.validationErrors();
+        console.log(data)
+        if(errors || data == true){
+            if(data == false){
+            console.log('no');
             req.session.errors = [];
-            res.redirect('/homepage');
-        })
-    }
+            req.session.errors = errors;
+            for(let error of errors){
+                errorArr.push(error['msg']);
+            }
+            console.log(errorArr + " " + req.sessionID);
+            console.log(req.body.password + " " + req.body.cpassword + ".")
+            req.session.errorArr = errorArr;
+        }
+                res.redirect('/');
+            
+        }else{
+            console.log('yes')
+            queryDB.storeData('name password email join_date user_id', `'${req.body.name}'  '${req.body.password}' '${req.body.email}' NOW() NULL`, 'users').then(() => {
+                // console.log("done");
+                }).then(() => {
+                req.session.errors = [];
+                res.redirect('/homepage');
+            })
+        }
+
+    }) 
         
 })
 
