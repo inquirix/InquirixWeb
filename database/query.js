@@ -1,11 +1,11 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host     : '10.67.71.7',
-    user     : 'root',
-    password : '98835Piggy98835!',
-    database : 'inquirix'
-  });
+    host: '10.67.71.7',
+    user: 'root',
+    password: '98835Piggy98835!',
+    database: 'inquirix'
+});
 /**
  * @param data data is string. Put te name of all the data you want to get
  * @param userId userId is the id of the user your looking for
@@ -23,8 +23,8 @@ exports.getData = (data, userId) => {
 
         let queryDB = () => {
             return new Promise((res, rej) => {
-                connection.query(sql, function(err, results){
-                    if(err) throw err;
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
                     // console.log(results);
                     dataArr = Object.values(results[0]);
                     // console.log(dataArr);
@@ -57,55 +57,55 @@ exports.storeData = (data, inputData, table) => {
         let columnsStr = "";
         let dataarr = [];
         let inputDataStr = "";
-    
-        for(let vars of store){
-            if(vars == store[store.length - 1]){
+
+        for (let vars of store) {
+            if (vars == store[store.length - 1]) {
                 columns.push(`${vars}`)
-            }else{
+            } else {
                 columns.push(`${vars},`)
             }
         }
-    
+
         columns[0] = "(" + columns[0];
         columns[columns.length - 1] += ")"
-    
-        for(let column of columns){
+
+        for (let column of columns) {
             columnsStr += column + " ";
         }
-    
-        for(let data of inputDataArr){
-            if(data == inputDataArr[inputDataArr.length - 1]){
+
+        for (let data of inputDataArr) {
+            if (data == inputDataArr[inputDataArr.length - 1]) {
                 dataarr.push(`${data}`);
-            }else{
+            } else {
                 dataarr.push(`${data},`);
             }
         }
-    
+
         dataarr[0] = "(" + inputDataArr[0];
         dataarr[inputDataArr.length - 1] += ")";
-        
-        for(let data of dataarr){
+
+        for (let data of dataarr) {
             inputDataStr += data + " ";
         }
-    
+
         let sql = `INSERT INTO ${table} ${columnsStr}VALUES ${inputDataStr} `
         console.log(sql);
-        
+
         let queryDB = () => {
             return new Promise((res, rej) => {
-                connection.query(sql, function(err, results){
-                    if(err) throw err;
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
                     console.log(results);
                     res();
                 })
             })
         }
-        
+
         queryDB().then(() => {
             res(true)
         });
     })
-    
+
 }
 
 /**
@@ -124,34 +124,34 @@ exports.changeData = (dataToChange, newData, condition, table) => {
         let newerData = newData.split(" ");
         let varsStr = "";
         let i = 0;
-    
-        for(let vars of varsArr){
-            if(vars == varsArr[varsArr.length - 1]){
+
+        for (let vars of varsArr) {
+            if (vars == varsArr[varsArr.length - 1]) {
                 varsStr += `${vars} = ${newerData[i]}`
-            }else{
+            } else {
                 varsStr += `${vars} = ${newerData[i]}, `
             }
             i++;
         }
-        
-    let queryDB = () => {
-        return new Promise((res, rej) => {
-            let sql = `UPDATE ${table} SET ${varsStr} WHERE ${condition}`
-            console.log(sql);
-            connection.query(sql, function(err, results){
-                if(err) throw err;
-                console.log(results);
-                res();
-            })
-        })
-    }
 
-    queryDB().then(() => {
-        res(true);
+        let queryDB = () => {
+            return new Promise((res, rej) => {
+                let sql = `UPDATE ${table} SET ${varsStr} WHERE ${condition}`
+                console.log(sql);
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
+                    console.log(results);
+                    res();
+                })
+            })
+        }
+
+        queryDB().then(() => {
+            res(true);
+        })
+
     })
-        
-    })
-    
+
 }
 
 /**
@@ -166,24 +166,24 @@ exports.getId = (password, name) => {
     return new Promise((res, rej) => {
         let search = "user_id";
         let sql = `SELECT ${search} FROM users WHERE name = ${name} AND password = ${password}`;
-    
+
         console.log(sql);
 
         let queryDB = () => {
             return new Promise((res, rej) => {
-                connection.query(sql, function(err, results){
-                    if(err) throw err;
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
                     console.log(results);
                     res(results[0].user_id);
                 })
             })
-            
+
         }
 
         queryDB().then((data) => {
             res(data)
         })
-        
+
     })
 }
 
@@ -197,27 +197,27 @@ exports.getId = (password, name) => {
 
 exports.verifyUser = (password, name) => {
     return new Promise((res, req) => {
-    let exists = false;
-        
+        let exists = false;
+
         let search = "user_id";
-        
-        let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;        
-        
+
+        let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;
+
         let queryDB = () => {
             return new Promise((res, req) => {
-                connection.query(sql, function(err, results){
-                    if(err) throw err;
-                    if(results[0] === undefined){
+                connection.query(sql, function(err, results) {
+                    if (err) throw err;
+                    if (results[0] === undefined) {
                         exists = false;
-                    }else{
+                    } else {
                         exists = true;
                     }
                     res();
+                })
             })
-        })    
-    }
+        }
         let returnData = () => {
-                res(exists);
+            res(exists);
         }
 
         queryDB().then(returnData);
