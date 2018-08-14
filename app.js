@@ -36,33 +36,33 @@ const server = app.listen(3000, (err) => {
     if (err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
 
-    //Testing verifyUser funtion
-    //Should return true
-    // queryDB.verifyUser('98835', 'Jeremy').then((data) => {
-    //     console.log(data);
-    // })
-    // //Should return false
-    // queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
-    //     console.log(data);
-    // })
-    // //testing get data function (should return array of data)
-    // queryDB.getData('name email password bio', 1).then((data) => {
-    //     console.log(data);
-    // });
+    // Testing verifyUser funtion
+    // Should return true
+    queryDB.verifyUser('98835', 'Jeremy').then((data) => {
+        console.log(data);
+    })
+    //Should return false
+    queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
+        console.log(data);
+    })
+    //testing get data function (should return array of data)
+    queryDB.getData('name email password bio', 1).then((data) => {
+        console.log(data);
+    });
 
-    // //testing storeData funtion (should send an Okpacket to DB and log "done")
-    // queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
-    //     console.log("done");
-    // })
+    //testing storeData funtion (should send an Okpacket to DB and log "done")
+    queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
+        console.log("done");
+    })
 
-    // //Testing changeData function (should send an Okpacket to DB and log "done")
-    // queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
-    //     console.log('done');
-    // })
+    //Testing changeData function (should send an Okpacket to DB and log "done")
+    queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
+        console.log('done');
+    })
 
-    // queryDB.getId("'98835'", "'Dale'").then((data) => {
-    //     console.log(data);
-    // })
+    queryDB.getId("'98835'", "'Dale'").then((data) => {
+        console.log(data);
+    })
 
 })
 
@@ -78,60 +78,82 @@ const server = app.listen(3000, (err) => {
 //    saveUninitialized: true
 // }));
 
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(flash());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.use('local', new LocalStrategy({
+// passport.use('local', new LocalStrategy({
 
-    usernameField: 'username',
+//     usernameField: 'username',
 
-    passwordField: 'password',
+//     passwordField: 'password',
 
-    passReqToCallback: true //passback entire req to call back
-}, function(req, username, password, done) {
-    if (!username || !password) {
-        return done(null, false, req.flash('message', 'All fields are required.'));
-    }
-    var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
-    connection.query("select * from tbl_users where username = ?", [username], function(err, rows) {
-        console.log(err);
-        console.log(rows);
-        if (err) return done(req.flash('message', err));
-        if (!rows.length) {
-            return done(null, false, req.flash('message', 'Invalid username or password.'));
-        }
-        salt = salt + '' + password;
-        var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
-        var dbPassword = rows[0].password;
-        if (!(dbPassword == encPassword)) {
-            return done(null, false, req.flash('message', 'Invalid username or password.'));
-        }
-        return done(null, rows[0]);
-    });
-}));
+//     passReqToCallback: true //passback entire req to call back
+// }, function(req, username, password, done) {
+//     if (!username || !password) {
+//         return done(null, false, req.flash('message', 'All fields are required.'));
+//     }
+//     var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
+//     connection.query("select * from tbl_users where username = ?", [username], function(err, rows) {
+//         console.log(err);
+//         console.log(rows);
+//         if (err) return done(req.flash('message', err));
+//         if (!rows.length) {
+//             return done(null, false, req.flash('message', 'Invalid username or password.'));
+//         }
+//         salt = salt + '' + password;
+//.body         var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
+//         var dbPassword = rows[0].password;
+//         if (!(dbPassword == encPassword)) {
+//             return done(null, false, req.flash('message', 'Invalid username or password.'));
+//         }
+//         return done(null, rows[0]);
+//     });
+// }));
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
+// passport.serializeUser(function(user, done) {
+//     done(null, user.id);
+// });
 
-passport.deserializeUser(function(id, done) {
-    connection.query("select * from tbl_users where id = " + id, function(err, rows) {
-        done(err, rows[0]);
-    });
-});
+// passport.deserializeUser(function(id, done) {
+//     connection.query("select * from tbl_users where id = " + id, function(err, rows) {
+//         done(err, rows[0]);
+//     });
+// });
 
 app.get('/HTML/index', function(req, res) {
     res.render('HTML/index', {
-        'message': req.flash('message')
     });
 });
 
 
 app.get('/', function(req, res){
-    res.render('HTML/Signup',{});
+    res.render('HTML/Signup', {title: 'Form Validation', success: false, errors: req.session.errors, errorArr : req.session.errorArr })
+    req.session.errors = null;
 })
 
+app.post("/submit", (req, res) => {
+    let errorArr = [];
+    req.check('email', 'Invalid Email Address').isEmail();
+    req.check('password', 'Password is invalid').isLength({min:6}).equals(req.body.cpassword)
+
+    var errors = req.validationErrors();
+    if(errors){
+        req.session.errors = [];
+        req.session.errors = errors;
+        for(let error of errors){
+            errorArr.push(error['msg']);
+        }
+        console.log(errorArr + " " + req.sessionID);
+        console.log(req.body.password + " " + req.body.cpassword + ".")
+        req.session.errorArr = errorArr;
+        res.redirect('/');
+    }else{
+            req.session.errors = [];
+        res.redirect('/HTML/index');
+    }
+        
+})
 
 app.post("/HTML/index", passport.authenticate('local', {
     successRedirect: 'HTML/Feed',
