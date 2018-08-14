@@ -243,8 +243,8 @@ exports.verifyEmail = (email) => {
             return new Promise((res, req) => {
                 connection.query(sql, function(err, results) {
                     if (err) throw err;
-                    console.log(results);
-                    if (results[0] === []) {
+                    console.log(results[0]);
+                    if (results[0] === undefined) {
                         exists = false;
                     } else {
                         exists = true;
