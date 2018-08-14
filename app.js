@@ -176,7 +176,7 @@ app.post("/homepage/checkdata", (req, res) => {
         queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
             console.log("I am " + data);
             if(data != null){
-                res.cookie('user_id', user_id, {maxAge: 60*60*1000});
+                res.cookie('user_id', user_id, {maxAge: 10000});
                 res.redirect('/feed')
             }else{
                 res.redirect('/homepage')
@@ -190,7 +190,7 @@ app.post("/checkdata", (req, res) => {
     queryDB.getId(`'${req.body.password}'`, `'${req.body.email}'`).then((user_id) => {
         queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
             if(data == true){
-                res.cookie('user_id', user_id, {maxAge: 60*60*1000});
+                res.cookie('user_id', user_id, {maxAge: 10000});
                 res.redirect('/feed')
             }else{
                 res.redirect('/homepage')
@@ -202,7 +202,12 @@ app.post("/checkdata", (req, res) => {
 
 app.get("/feed", (req, res) => {
     console.log('Cookies: ', req.cookies);
+    if(req.cookies.user_id != undefined){
+    console.log(req.cookies.user_id);
     res.render("HTML/Feed")
+    }else{
+        res.redirect('/homepage')
+    }
 })
 
 
