@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host     : '192.168.86.43',
+    host     : '10.67.71.7',
     user     : 'root',
     password : '98835Piggy98835!',
     database : 'inquirix'
@@ -11,6 +11,7 @@ const connection = mysql.createConnection({
  * @param userId userId is the id of the user your looking for
  * @description data format - 'variable variable variable'
  * @example getData("name email password", 567)
+ * @returns  an array of data
  */
 
 exports.getData = (data, userId) => {
@@ -45,6 +46,7 @@ exports.getData = (data, userId) => {
  * 
  * @description This function will access the database and input data into it
  * @example storeData('name email password user_id', "'Jeremy' 'jsbparson@gmail.com' '12345' 609", "users"))
+ * @returns nothing
  */
 
 exports.storeData = (data, inputData, table) => {
@@ -113,6 +115,7 @@ exports.storeData = (data, inputData, table) => {
  * @param table The table name
  * 
  * @example changeData("name email password", "'bob' 'bob@example.org' 'bobby123'","name = 'jeremy', 'users'")
+ * @returns nothing
  */
 
 exports.changeData = (dataToChange, newData, condition, table) => {
@@ -156,6 +159,7 @@ exports.changeData = (dataToChange, newData, condition, table) => {
  * @param name Put the name of the user
  * @description this will get the id of the user based off of there password and name
  * @example getId("'bobby213'", "'bob'")
+ * @returns Id of user
  */
 
 exports.getId = (password, name) => {
@@ -188,6 +192,7 @@ exports.getId = (password, name) => {
  * @param password Put the password of the user
  * @param name Put the name of the user
  * @description This will check the user database to see if a user indeed does exist
+ * @returns true or false
  */
 
 exports.verifyUser = (password, name) => {

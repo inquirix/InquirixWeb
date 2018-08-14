@@ -12,7 +12,6 @@ const queryDB = require('./database/query');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
-
 const app = express();
 
 app.use(express.static(__dirname + '/Library'))
