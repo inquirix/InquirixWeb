@@ -38,31 +38,31 @@ const server = app.listen(3000, (err) => {
 
     //Testing verifyUser funtion
     //Should return true
-    queryDB.verifyUser('98835', 'Jeremy').then((data) => {
-        console.log(data);
-    })
-    //Should return false
-    queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
-        console.log(data);
-    })
-    //testing get data function (should return array of data)
-    queryDB.getData('name email password bio', 1).then((data) => {
-        console.log(data);
-    });
+    // queryDB.verifyUser('98835', 'Jeremy').then((data) => {
+    //     console.log(data);
+    // })
+    // //Should return false
+    // queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
+    //     console.log(data);
+    // })
+    // //testing get data function (should return array of data)
+    // queryDB.getData('name email password bio', 1).then((data) => {
+    //     console.log(data);
+    // });
 
-    //testing storeData funtion (should send an Okpacket to DB and log "done")
-    queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
-        console.log("done");
-    })
+    // //testing storeData funtion (should send an Okpacket to DB and log "done")
+    // queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
+    //     console.log("done");
+    // })
 
-    //Testing changeData function (should send an Okpacket to DB and log "done")
-    queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
-        console.log('done');
-    })
+    // //Testing changeData function (should send an Okpacket to DB and log "done")
+    // queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
+    //     console.log('done');
+    // })
 
-    queryDB.getId("'98835'", "'Dale'").then((data) => {
-        console.log(data);
-    })
+    // queryDB.getId("'98835'", "'Dale'").then((data) => {
+    //     console.log(data);
+    // })
 
 })
 
@@ -126,6 +126,11 @@ app.get('/HTML/index', function(req, res) {
         'message': req.flash('message')
     });
 });
+
+
+app.get('/', function(req, res){
+    res.render('HTML/Signup',{});
+})
 
 
 app.post("/HTML/index", passport.authenticate('local', {
