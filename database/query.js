@@ -80,12 +80,44 @@ exports.storeData = (data, inputData, table) => {
     })
 }
 
-exports.changeData = (dataToChange, newData, table) => {
+/**
+ * @param dataToChange Place the var names of the data you want to change here  | name | password | email | bio | interest | state | city | sex | join_date | session_id | socket_id | user_id | //Format: "data data data"
+ * @param newData Corrosponding to the inputs of dataToChange, if the enwdata is a string use single qoutes inside double qoutes.
+ * @param condition States a condition that restrains the amount of data teh query gets
+ * @param table The table name
+ */
+
+exports.changeData = (dataToChange, newData, condition, table) => {
+    let varsArr = dataToChange.split(" ");
+    let newerData = newData.split(" ");
+    let varsStr = "";
+    let i = 0;
+
+    for(let vars of varsArr){
+        if(vars == varsArr[varsArr.length - 1]){
+            varsStr += `${vars} = ${newerData[i]}`
+        }else{
+            varsStr += `${vars} = ${newerData[i]}, `
+        }
+        i++;
+    }
     
+
+    let sql = `UPDATE ${table} SET ${varsStr} WHERE ${condition}`
+    console.log(sql);
+    connection.query(sql, function(err, results){
+        if(err) throw err;
+        console.log(results);
+    })
 }
 
+/**
+ * @param password put the password of the user
+ * @param put the name of the user
+ * @description this will get the id of the user based off of there password and name
+ */
 
-exports.getId = (password, name, userId) => {
+exports.getId = (password, name) => {
     let search = "user_id";
     let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;
 

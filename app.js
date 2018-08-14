@@ -30,7 +30,8 @@ app.use(session({secret:"max", saveUninitialized:false,resave:false}))
 const server = app.listen(3000, (err) => {
     if(err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
-    queryDB.getId('12345!', 'John');
+    queryDB.changeData('name password', "'Jeremy' '98835'", "name = 'John' ",'users')
+
 })
 
 
