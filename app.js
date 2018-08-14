@@ -30,7 +30,22 @@ app.use(session({secret:"max", saveUninitialized:false,resave:false}))
 const server = app.listen(3000, (err) => {
     if(err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
-    queryDB.changeData('name password', "'Jeremy' '98835'", "name = 'John' ",'users')
+
+    //Testing verifyUser funtion
+    //Should return true
+    queryDB.verifyUser('98835', 'Jeremy').then((data) => {
+        console.log(data);
+    })
+    //Should return false
+    queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
+        console.log(data);
+    })
+    //testing get data function (should return array of data)
+    queryDB.getData('name email password bio', 1).then((data) => {
+        console.log(data);
+    });
+
+    
 
 })
 
@@ -84,13 +99,6 @@ passport.deserializeUser(function(id, done){
         done(err, rows[0]);
     });
 });
-
-const connection = mysql.createConnection({
-    host     : '10.67.71.7',
-    user     : 'root',
-    password : '98835Piggy98835!',
-    database : 'students'
-  });
 
   app.get('/HTML/index', function(req, res){
     res.render('HTML/index',{'message' :req.flash('message')});

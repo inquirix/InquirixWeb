@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host     : '10.67.71.7',
+    host     : '192.168.86.43',
     user     : 'root',
     password : '98835Piggy98835!',
     database : 'inquirix'
@@ -10,27 +10,41 @@ const connection = mysql.createConnection({
  * @param data data is string. Put te name of all the data you want to get
  * @param userId userId is the id of the user your looking for
  * @description data format - 'variable variable variable'
+ * @example getData("name email password", 567)
  */
 
 exports.getData = (data, userId) => {
-    let search = data.split(" ");
-    search.join(" ");
-    let sql = `SELECT ${search} FROM users WHERE user_id = ${userId}`;
-    connection.query(sql, function(err, results){
-        if(err) throw err;
-        console.log(results);
+    return new Promise((res, rej) => {
+        let search = data.split(" ");
+        let dataArr = [];
+        search.join(" ");
+        let sql = `SELECT ${search} FROM users WHERE user_id = ${userId}`;
+
+        let queryDB = () => {
+            return new Promise((res, rej) => {
+                connection.query(sql, function(err, results){
+                    if(err) throw err;
+                    // console.log(results);
+                    dataArr = Object.values(results[0]);
+                    // console.log(dataArr);
+                    res();
+                })
+            })
+        }
+        queryDB().then(() => {
+            res(dataArr);
+        })
     })
 }
 
 /**
  * @param data Place the variables_names you want to input here | name | password | email | bio | interest | state | city | sex | join_date | session_id | socket_id | user_id |
  * @type string
- * @example "data param input : 'name password email' "
  * @param inputData Place the desired values in corrisponding order to what you put into data
- * @example "inputData param input : 'Jeremy 123456! dude@example.com' "
  * @param table The that you want to add the data to
  * 
- * @description This function will access information in the databas and input it
+ * @description This function will access the database and input data into it
+ * @example storeData('name email password user_id', ("'Jeremy' 'jsbparson@gmail.com' '12345' 609"))
  */
 
 exports.storeData = (data, inputData, table) => {
@@ -85,6 +99,8 @@ exports.storeData = (data, inputData, table) => {
  * @param newData Corrosponding to the inputs of dataToChange, if the enwdata is a string use single qoutes inside double qoutes.
  * @param condition States a condition that restrains the amount of data teh query gets
  * @param table The table name
+ * 
+ * @example changeData("name email password", "'bob' 'bob@example.org' 'bobby123'","name = 'jeremy', 'users'")
  */
 
 exports.changeData = (dataToChange, newData, condition, table) => {
@@ -112,9 +128,10 @@ exports.changeData = (dataToChange, newData, condition, table) => {
 }
 
 /**
- * @param password put the password of the user
- * @param put the name of the user
+ * @param password Put the password of the user
+ * @param name Put the name of the user
  * @description this will get the id of the user based off of there password and name
+ * @example getId("'bobby213'", "'bob'")
  */
 
 exports.getId = (password, name) => {
@@ -125,5 +142,41 @@ exports.getId = (password, name) => {
     connection.query(sql, function(err, results){
         if(err) throw err;
         console.log(results);
+    })
+}
+
+
+/**
+ * @param password Put the password of the user
+ * @param name Put the name of the user
+ * @description This will check the user database to see if a user indeed does exist
+ */
+
+exports.verifyUser = (password, name) => {
+    return new Promise((res, req) => {
+    let exists = false;
+        
+        let search = "user_id";
+        
+        let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;        
+        
+        let queryDB = () => {
+            return new Promise((res, req) => {
+                connection.query(sql, function(err, results){
+                    if(err) throw err;
+                    if(results[0] === undefined){
+                        exists = false;
+                    }else{
+                        exists = true;
+                    }
+                    res();
+            })
+        })    
+    }
+        let returnData = () => {
+                res(exists);
+        }
+
+        queryDB().then(returnData);
     })
 }
