@@ -156,16 +156,16 @@ exports.changeData = (dataToChange, newData, condition, table) => {
 
 /**
  * @param password Put the password of the user
- * @param name Put the name of the user
+ * @param email Put the email of the user
  * @description this will get the id of the user based off of there password and name
- * @example getId("'bobby213'", "'bob'")
+ * @example getId("'bobby213'", "'bob@example.org'")
  * @returns Id of user
  */
 
-exports.getId = (password, name) => {
+exports.getId = (password, email) => {
     return new Promise((res, rej) => {
         let search = "user_id";
-        let sql = `SELECT ${search} FROM users WHERE name = ${name} AND password = ${password}`;
+        let sql = `SELECT ${search} FROM users WHERE email = ${email} AND password = ${password}`;
 
         console.log(sql);
 
@@ -174,7 +174,11 @@ exports.getId = (password, name) => {
                 connection.query(sql, function(err, results) {
                     if (err) throw err;
                     console.log(results);
-                    res(results[0].user_id);
+                    if(results[0] == undefined){
+                        res(null);
+                    }else{
+                        res(results[0].user_id);
+                    }   
                 })
             })
 
@@ -234,13 +238,13 @@ exports.verifyEmail = (email) => {
         let sql = `SELECT ${search} FROM users WHERE email = '${email}'`;
 
         
-
+            console.log(sql);
         let queryDB = () => {
             return new Promise((res, req) => {
                 connection.query(sql, function(err, results) {
                     if (err) throw err;
-                    if (results[0] === undefined) {
-                        console.log(results);
+                    console.log(results);
+                    if (results[0] === []) {
                         exists = false;
                     } else {
                         exists = true;

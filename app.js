@@ -4,7 +4,7 @@ const validator = require('express-validator');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 // const socket = require('socket.io');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const crypto = require("crypto");
 const memory = require("memory");
 const flash = require("connect-flash");
@@ -19,14 +19,14 @@ app.use(express.static(__dirname + '/Library'))
 app.set('view engine', 'ejs');
 app.set('views', (__dirname + '/Library'));
 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }))
 app.use(validator());
-// app.use(cookieParser());
 app.use(session({
-    secret: "max",
+    secret: "asfsdafgwrajgklaio",
     saveUninitialized: false,
     resave: false
 }))
@@ -128,11 +128,13 @@ app.get('/homepage', function(req, res) {
 
 
 app.get('/', function(req, res){
+    console.log('Cookies: ', req.cookies);
     res.render('HTML/Signup', {title: 'Form Validation', success: false, errors: req.session.errors, errorArr : req.session.errorArr })
     req.session.errors = null;
 })
 
 app.post("/submit", (req, res) => {
+    console.log('Cookies: ', req.cookies);
     let errorArr = [];
     req.check('email', 'Invalid Email Address').isEmail();
     req.check('password', 'Password is invalid').isLength({min:6}).equals(req.body.cpassword)
@@ -168,18 +170,38 @@ app.post("/submit", (req, res) => {
         
 })
 
-app.post("/checkdata", (req, res) => {
-    queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
-        if(data == true){
-            res.redirect('/feed')
-        }else{
-            res.redirect('/homepage')
-        }
+app.post("/homepage/checkdata", (req, res) => {
+    console.log('Cookies: ', req.cookies);
+    queryDB.getId(`'${req.body.password}'`, `'${req.body.email}'`).then((user_id) => {
+        queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
+            console.log("I am " + data);
+            if(data != null){
+                res.cookie('user_id', user_id, {maxAge: 60*60*1000});
+                res.redirect('/feed')
+            }else{
+                res.redirect('/homepage')
+            }
+        })
     })
-    
 })
 
+app.post("/checkdata", (req, res) => {
+    console.log('Cookies: ', req.cookies);
+    queryDB.getId(`'${req.body.password}'`, `'${req.body.email}'`).then((user_id) => {
+        queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
+            if(data == true){
+                res.cookie('user_id', user_id, {maxAge: 60*60*1000});
+                res.redirect('/feed')
+            }else{
+                res.redirect('/homepage')
+            }
+        })
+    })
+})
+
+
 app.get("/feed", (req, res) => {
+    console.log('Cookies: ', req.cookies);
     res.render("HTML/Feed")
 })
 
