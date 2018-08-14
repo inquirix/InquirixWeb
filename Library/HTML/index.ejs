@@ -22,15 +22,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <form class="form-inline">
+                        <form class="form-inline" action = "checkdata" method = "POST">
                             <label class="sr-only" for="inlineFormInputName2">Email</label>
-                            <input type="text" class="form-control mb-0 mr-sm-3" id="inlineFormInputName2" placeholder="Enter Your Email.">
+                            <input type="text" class="form-control mb-0 mr-sm-3" id="inlineFormInputName2" placeholder="Enter Your Email." name = "email">
                             
                             <label class="sr-only" for="inlineFormInputGroupUsername2">Password</label>
                             <div class="input-group mb-0 mr-sm-2">
                                 <div class="input-group-prepend">
                                 </div>
-                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Password.">
+                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Password." name = "password">
                             </div>
                             <button type="submit" class="btn btn-primary mb-0">Submit</button>
                         </form>

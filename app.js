@@ -36,33 +36,33 @@ const server = app.listen(3000, (err) => {
     if (err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
 
-    // Testing verifyUser funtion
-    // Should return true
-    queryDB.verifyUser('98835', 'Jeremy').then((data) => {
-        console.log(data);
-    })
-    //Should return false
-    queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
-        console.log(data);
-    })
-    //testing get data function (should return array of data)
-    queryDB.getData('name email password bio', 1).then((data) => {
-        console.log(data);
-    });
+    // // Testing verifyUser funtion
+    // // Should return true
+    // queryDB.verifyUser('98835', 'Jeremy').then((data) => {
+    //     console.log(data);
+    // })
+    // //Should return false
+    // queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
+    //     console.log(data);
+    // })
+    // //testing get data function (should return array of data)
+    // queryDB.getData('name email password bio', 1).then((data) => {
+    //     console.log(data);
+    // });
 
-    //testing storeData funtion (should send an Okpacket to DB and log "done")
-    queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
-        console.log("done");
-    })
+    // //testing storeData funtion (should send an Okpacket to DB and log "done")
+    // queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
+    //     console.log("done");
+    // })
 
-    //Testing changeData function (should send an Okpacket to DB and log "done")
-    queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
-        console.log('done');
-    })
+    // //Testing changeData function (should send an Okpacket to DB and log "done")
+    // queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
+    //     console.log('done');
+    // })
 
-    queryDB.getId("'98835'", "'Dale'").then((data) => {
-        console.log(data);
-    })
+    // queryDB.getId("'98835'", "'Dale'").then((data) => {
+    //     console.log(data);
+    // })
 
 })
 
@@ -121,7 +121,7 @@ const server = app.listen(3000, (err) => {
 //     });
 // });
 
-app.get('/HTML/index', function(req, res) {
+app.get('/homepage', function(req, res) {
     res.render('HTML/index', {
     });
 });
@@ -147,23 +147,34 @@ app.post("/submit", (req, res) => {
         console.log(errorArr + " " + req.sessionID);
         console.log(req.body.password + " " + req.body.cpassword + ".")
         req.session.errorArr = errorArr;
-        res.redirect('/');
+        
+            res.redirect('/');
+        
     }else{
+        queryDB.storeData('name password email join_date user_id', `'${req.body.name}'  '${req.body.password}' '${req.body.email}' NOW() NULL`, 'users').then(() => {
+            console.log("done");
+            }).then(() => {
             req.session.errors = [];
-        res.redirect('/HTML/index');
+            res.redirect('/homepage');
+        })
     }
         
 })
 
-app.post("/HTML/index", passport.authenticate('local', {
-    successRedirect: 'HTML/Feed',
-    failureRedirect: '/HTML/index',
-    failureFlash: true
-}), function(req, res, info) {
-    res.render('HTML/Feed', {
-        'message': req.flash('message')
-    });
-});
+app.post("/checkdata", (req, res) => {
+    queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
+        if(data == true){
+            res.redirect('/feed')
+        }else{
+            res.redirect('/homepage')
+        }
+    })
+    
+})
+
+app.get("/feed", (req, res) => {
+    res.render("HTML/Feed")
+})
 
 
 // const io = socket(server);

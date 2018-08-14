@@ -190,18 +190,18 @@ exports.getId = (password, name) => {
 
 /**
  * @param password Put the password of the user
- * @param name Put the name of the user
+ * @param email Put the email of the user
  * @description This will check the user database to see if a user indeed does exist
  * @returns true or false
  */
 
-exports.verifyUser = (password, name) => {
+exports.verifyUser = (password, email) => {
     return new Promise((res, req) => {
         let exists = false;
 
         let search = "user_id";
 
-        let sql = `SELECT ${search} FROM users WHERE name = '${name}' AND password = '${password}'`;
+        let sql = `SELECT ${search} FROM users WHERE email = '${email}' AND password = '${password}'`;
 
         let queryDB = () => {
             return new Promise((res, req) => {
