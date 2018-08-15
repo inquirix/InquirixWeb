@@ -220,7 +220,7 @@ app.get("/question", (req, res) => {
         queryDB.getData('name', req.cookies.user_id).then((data) => {
             res.render("HTML/question", {
                 questionNum: req.query.questionNum,
-                name : data
+                name : data 
             })
         })   
     } else {

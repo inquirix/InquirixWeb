@@ -37,7 +37,7 @@ socket.on(params.chat_id, (data) => {
 
 
 socket.on(`#${params.chat_id}`, (data) => {
-    output.innerHTML += `<p id = 'cmessage'> ${data.message} link -> ${data.linkToChat}</p>`;
+    output.innerHTML += `<p id = 'cmessage'> ${data.message}  <button onclick = "window.location = '${data.linkToChat}'">Go </button></p>`;
 })
 
 const storeMessage = () => {
