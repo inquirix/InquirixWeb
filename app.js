@@ -122,14 +122,18 @@ const server = app.listen(3000, (err) => {
 // });
 
 app.get('/homepage', function(req, res) {
-    res.render('HTML/index', {
-    });
+    res.render('HTML/index', {});
 });
 
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
     console.log('Cookies: ', req.cookies);
-    res.render('HTML/Signup', {title: 'Form Validation', success: false, errors: req.session.errors, errorArr : req.session.errorArr })
+    res.render('HTML/Signup', {
+        title: 'Form Validation',
+        success: false,
+        errors: req.session.errors,
+        errorArr: req.session.errorArr
+    })
     req.session.errors = null;
 })
 
@@ -137,48 +141,52 @@ app.post("/submit", (req, res) => {
     console.log('Cookies: ', req.cookies);
     let errorArr = [];
     req.check('email', 'Invalid Email Address').isEmail();
-    req.check('password', 'Password is invalid').isLength({min:6}).equals(req.body.cpassword)
+    req.check('password', 'Password is invalid').isLength({
+        min: 6
+    }).equals(req.body.cpassword)
 
     queryDB.verifyEmail(req.body.email).then((data) => {
         var errors = req.validationErrors();
         console.log(data)
-        if(errors || data == true){
-            if(data == false){
-            console.log('no');
-            req.session.errors = [];
-            req.session.errors = errors;
-            for(let error of errors){
-                errorArr.push(error['msg']);
+        if (errors || data == true) {
+            if (data == false) {
+                console.log('no');
+                req.session.errors = [];
+                req.session.errors = errors;
+                for (let error of errors) {
+                    errorArr.push(error['msg']);
+                }
+                console.log(errorArr + " " + req.sessionID);
+                console.log(req.body.password + " " + req.body.cpassword + ".")
+                req.session.errorArr = errorArr;
             }
-            console.log(errorArr + " " + req.sessionID);
-            console.log(req.body.password + " " + req.body.cpassword + ".")
-            req.session.errorArr = errorArr;
-        }
-                res.redirect('/');
-            
-        }else{
+            res.redirect('/');
+
+        } else {
             console.log('yes')
             queryDB.storeData('name password email join_date user_id', `'${req.body.name}'  '${req.body.password}' '${req.body.email}' NOW() NULL`, 'users').then(() => {
                 // console.log("done");
-                }).then(() => {
+            }).then(() => {
                 req.session.errors = [];
                 res.redirect('/homepage');
             })
         }
 
-    }) 
-        
+    })
+
 })
 
 app.post("/homepage/checkdata", (req, res) => {
     console.log('Cookies: ', req.cookies);
     queryDB.getId(`'${req.body.password}'`, `'${req.body.email}'`).then((user_id) => {
-        queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
+        queryDB.verifyUser(req.body.password, req.body.email).then((data) => {
             console.log("I am " + data);
-            if(data != null){
-                res.cookie('user_id', user_id, {maxAge: 30 * 30 * 1000});
+            if (data != null) {
+                res.cookie('user_id', user_id, {
+                    maxAge: 30 * 30 * 1000
+                });
                 res.redirect('/feed')
-            }else{
+            } else {
                 res.redirect('/homepage')
             }
         })
@@ -188,11 +196,13 @@ app.post("/homepage/checkdata", (req, res) => {
 app.post("/checkdata", (req, res) => {
     console.log('Cookies: ', req.cookies);
     queryDB.getId(`'${req.body.password}'`, `'${req.body.email}'`).then((user_id) => {
-        queryDB.verifyUser(req.body.password,req.body.email).then((data)=>{
-            if(data == true){
-                res.cookie('user_id', user_id, {maxAge: 30 * 30 * 1000});
+        queryDB.verifyUser(req.body.password, req.body.email).then((data) => {
+            if (data == true) {
+                res.cookie('user_id', user_id, {
+                    maxAge: 30 * 30 * 1000
+                });
                 res.redirect('/feed')
-            }else{
+            } else {
                 res.redirect('/homepage')
             }
         })
@@ -200,24 +210,26 @@ app.post("/checkdata", (req, res) => {
 })
 
 app.get("/question", (req, res) => {
-    // console.log('Cookies: ', req.cookies);
-    // if(req.cookies.user_id != undefined){
-    // console.log(req.cookies.user_id);
-    // res.render("HTML/questions")
-    // }else{
-    //     res.redirect('/homepage')
-    // }
+    console.log('Cookies: ', req.cookies);
+    if (req.cookies.user_id != undefined) {
+        console.log(req.cookies.user_id);
+        req.session.cookie.maxAge += (1000 * 50);
+        res.render("HTML/questions")
+    } else {
+        res.redirect('/homepage')
+    }
     res.render("HTML/question", {
-        questionNum : req.query.questionNum
+        questionNum: req.query.questionNum
     })
 })
 
 app.get("/feed", (req, res) => {
     console.log('Cookies: ', req.cookies);
-    if(req.cookies.user_id != undefined){
-    console.log(req.cookies.user_id);
-    res.render("HTML/Feed")
-    }else{
+    if (req.cookies.user_id != undefined) {
+        console.log(req.cookies.user_id);
+        req.session.cookie.maxAge += (1000 * 50);
+        res.render("HTML/Feed")
+    } else {
         res.redirect('/homepage')
     }
 })
