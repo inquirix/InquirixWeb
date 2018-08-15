@@ -1,3 +1,12 @@
+.subjects h1:hover {
+  color : lightblue;
+}
+
+.collapse p:hover {
+  color : lightblue;
+}
+
+
 #community{
     text-align: center;
 }
