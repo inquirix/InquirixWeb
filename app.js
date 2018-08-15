@@ -3,7 +3,7 @@ const express = require('express');
 const validator = require('express-validator');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-// const socket = require('socket.io');
+const socket = require('socket.io');
 const cookieParser = require('cookie-parser');
 const crypto = require("crypto");
 const memory = require("memory");
@@ -199,6 +199,18 @@ app.post("/checkdata", (req, res) => {
     })
 })
 
+app.get("/question", (req, res) => {
+    // console.log('Cookies: ', req.cookies);
+    // if(req.cookies.user_id != undefined){
+    // console.log(req.cookies.user_id);
+    // res.render("HTML/questions")
+    // }else{
+    //     res.redirect('/homepage')
+    // }
+    res.render("HTML/question", {
+        questionNum : req.query.questionNum
+    })
+})
 
 app.get("/feed", (req, res) => {
     console.log('Cookies: ', req.cookies);

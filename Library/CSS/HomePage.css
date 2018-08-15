@@ -1,4 +1,32 @@
 /*Nav Bar (1-27)*/
+
+#centerGraph{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: row;
+}
+
+#question{
+  margin-left: 160px;
+}
+
+#questionText{
+  width: 80%;
+}
+
+#answer_field{
+  margin-bottom: 35px;
+}
+
+#questionTitle{
+  margin-left: 510px;
+}
+
+#submit_button{
+  margin-bottom: 20px;
+}
+
 .navbar-brand img{
     height: 50px;
     width: 50px;
@@ -127,6 +155,7 @@
     margin-top: .8rem;
     margin-bottom: 1rem;
   }
+
   /*---Media Queries --*/
   @media (max-width: 992px) {
     .social a {
