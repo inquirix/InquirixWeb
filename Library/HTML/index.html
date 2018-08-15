@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inquirix</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="script.js" defer></script>
+    <link href="../CSS/HomePage.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="../../assets/inquerix1.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target ="#navbarResponsive">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <form class="form-inline" action = "checkdata" method = "POST">
+                            <label class="sr-only" for="inlineFormInputName2">Email</label>
+                            <input type="text" class="form-control mb-0 mr-sm-3" id="inlineFormInputName2" placeholder="Enter Your Email." name = "email">
+                            
+                            <label class="sr-only" for="inlineFormInputGroupUsername2">Password</label>
+                            <div class="input-group mb-0 mr-sm-2">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Enter Password." name = "password">
+                            </div>
+                            <button type="submit" class="btn btn-primary mb-0">Submit</button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<!--End of Navigation.-->
+<!--Start of JumboTron-->
+    <div id="bigImage">
+            <div class="jumbotron">
+                <img src="../../assets/high-school-students.jpg">
+            </div>
+    </div>
+    <div id="images"> 
+        <img id="learn" src="../../assets/icons8-workspace-480.png">
+        <img id="study" src="../../assets/icons8-school-480.png">
+        <img id="collab" src="../../assets/collaboration-female-male.png">
+    </div>
+    <div id="imagesText">
+        <p id="learnText">With a growing community and great catolog of resources and tools, nothing is impossible to learn </p>
+        <p id="studyText">A proffessional workspace is something that everyone craves. Inquirix provides that environment and forces you into study habbits that will overtime become hard to break</p>
+        <p id="collabText">Collaborating with friends and family has never been easier and more encouraged. Now you and your friends can improve as scholars, two heads were always better than one</p>
+    </div>
+    <div id="signUp">
+            <button type="button" class="btn btn-primary btn-lg">Sign Up</button>
+    </div>
+    <!--End of Jumbo-->
+    <!--- Connect -->
+    <hr class="my-4">
+
+<div class="container-fluid padding">
+        <div class="row text-center padding">
+                <div class="col-12">
+                    <h2>Connect</h2>
+                </div>
+                <div class="col-12 social padding">
+                    <a href="#"><i class="fab fa-facebook"</a></i>
+                    <a href="#"><i class="fab fa-twitter"</a></i>
+                    <a href="#"><i class="fab fa-linkedin"</a></i>
+                    <a href="#"><i class="fab fa-instagram"</a></i>
+                    <a href="#"><i class="fab fa-google-plus"</a></i>
+                    <a href="#"><i class="fab fa-github"</a></i>
+                </div>
+        </div>
+        </div>
+        <!--- Footer -->
+        <footer>
+            <div class="container-fluid padding">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <hr class="light">
+                        <h5>Fayeem</h5>
+                        <p>914-314-8219</p>
+                        <p>Fayeemf@gmail.com</p>
+                    </div>
+                    <div class="col-md-4">
+                        <hr class="light">
+                        <h5>Kwaku</h5>
+                        <p>boafo819@gmail.com</p>
+                        <p>718-496-5487</p>
+                    </div>
+                    <div class="col-md-4">
+                            <hr class="light">
+                            <h5>Jeremy</h5>
+                            <p>Jsbparson@gmail.com</p>
+                            <p>201-519-7616</p>
+                        </div>
+                    <div class="col-12">
+                        <hr class="light-100">
+                        <h5>&copy; Inquirix</h5>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    
+</body>
+</html>

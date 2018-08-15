@@ -1,0 +1,119 @@
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+hr{
+    border-color: black;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.form-control{
+    position: relative;
+    bottom: -14px;
+    border: 3px solid;
+}
+#yo{
+    width: 40px;
+    height: 40px;
+}
+
+.navbar navbar-light bg-light sticky-top{
+    border: 3em solid;
+}
+.card{
+    border: 4px solid black;
+    margin: auto;
+    position: relative;
+    right: -419.5px;
+    bottom: -32px;
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    box-shadow: 10px 10px 5px grey;
+
+}
+.card img{
+    /* border-radius: 50% */
+}
+.card-body{
+    text-align: center;
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    
+}
+
+#thats {
+    width: 520px;
+    height: 100px;
+    padding: 20px;
+    border: 5px solid black;
+    margin:auto;
+    position: relative;
+    bottom: -40px;
+    left: -40px;
+    box-shadow: 10px 10px 5px grey;
+
+}
+#TickleMySickleCell{
+    width: 620px;
+    height: 50px;
+    padding: 10px;
+    border: 5px solid black;
+    margin:auto;
+    text-align: center;
+    position: relative;
+    bottom: -60px;
+    left: -40px;
+    box-shadow: 10px 10px 5px grey;
+
+}
+hr{
+    border-color: black;
+    border: 1px solid black;
+}
+header{
+    font-size: 32px;
+    text-align: center;
+    position: relative;
+    left: -27px;
+}
+footer{
+    background-color: #263238;
+    color: whitesmoke;
+    padding: 2rem;
+  }
+  hr.light{
+    border-top: 2px solid black;
+    width: 75%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+  }
+  footer a{
+    color: aqua;
+  }
+  hr.light-100{
+    border-top: 1px solid black;
+    width: 100%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+  }
