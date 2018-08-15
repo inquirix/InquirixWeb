@@ -241,9 +241,6 @@ app.get('/userProfile', (req, res) => {
         res.redirect('/homepage')
     }
 })
-
-
-
 io.on('connection', (socket) => {
     console.log('User Socket Connection Created...' + socket.id)
 
