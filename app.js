@@ -99,7 +99,6 @@ app.get('/homepage', function(req, res) {
     res.render('HTML/index', {});
 });
 
-
 app.get('/signup', function(req, res) {
     console.log('Cookies: ', req.cookies);
     res.render('HTML/Signup', {
