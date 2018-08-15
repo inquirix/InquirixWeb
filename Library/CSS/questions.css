@@ -1,7 +1,16 @@
 /*Nav Bar (1-27)*/
-#Maincontainer{
-  display: flex;
-  flex-direction: row;
+#output{
+  background-color: lightblue;
+  height: 30vh;
+  width: 100%;
+}
+
+#chatContainer{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 45vh;
 }
 
 #centerGraph{

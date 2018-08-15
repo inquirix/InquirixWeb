@@ -13,7 +13,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src = "/JavaScript/questions.js" type="text/javascript" defer></script>
     <script src = "/questions/questionsData.js" type="text/javascript"></script>
-    <link href="../CSS/HomePage.css" rel="stylesheet">
+    <link href="../CSS/questions.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -37,6 +37,12 @@
 <h3 id = "questionTitle">Zoo animals</h3>
     <div id = "centerGraph">
         <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+        <div id = "chatContainer">
+            <input type = "submit" value = "help-me!" id = "help-me">
+            <div id = "output"></div>
+            <input type = "text" placeholder = "Message" id = "message">
+            <input type = "submit" value = "send">
+            </div>
         </div>
     </div>
     <div id = "question">
@@ -45,5 +51,6 @@
         <input type = "text" id = "answer_field" placeholder = "answer">
         <input type = "submit" id = "submit_button" value = "Submit Answer">
     </div>
+    
 </body>
 </html>

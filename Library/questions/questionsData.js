@@ -1,6 +1,7 @@
 const data = {
     "questions" : [
         {
+            "type" : "math",
             "question" : "A new zoo has opened up and they have hired you to find out how many animals are in the zoo. So far the zoo has 3 groups of animals: griaffes, hippos, and mokeys. Which animal does the zoo have the most of? ",
             "questionAnswer" : "monkeys",
             "questionTitle" : "Zoo Animals",
@@ -12,6 +13,7 @@ const data = {
             }]
         },
         {
+            "type" : "math",
             "question" : "This line starts at (0,0) and ends ate (50,68). Calculate the slope of the line.",
             "questionAnswer" : "1.36",
             "questionTitle" : "Slope #01",
@@ -26,6 +28,7 @@ const data = {
                 ]
            },
            {
+                "type" : "math",
                 "graphType" : "pie",
                 "graphData" : [{
                     values: [19, 26, 55],
@@ -37,7 +40,8 @@ const data = {
                     width: 500
                   }
            },
-           {    
+           {  
+            "type" : "math",  
                "questionTitle" : "Multi-plane visualization #01", 
                 "questionAnswer" : "idk",
                "question" : "Sequence An for non-negative integer n is such that",
