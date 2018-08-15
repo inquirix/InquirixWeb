@@ -8,6 +8,7 @@
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <link rel="stylesheet" href="../CSS/FeedPage.css">
     <script src="Feedy.js" defer></script>
+    <link href="CSS/NAVTHEMAN.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ranga" rel="stylesheet">
     <title>Title</title>
 </head>
@@ -35,13 +36,23 @@
                 </ul>
             </div>
         </div>
+        <div class="dropdown">
+                                <button id="myBtn" class="dropbtn"><img id="godhelpMe" src="assets/5b175ab3090385b31cc5f04ef08f0fc3.png" onclick = "window.location='/userProfile'"></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="/signup" onclick = "window.location = '/signup'">Sign Up</a>
+                                    <a href="/homepage" onclick = "window.location = '/homepage'">Home Page</a>
+                                    <a href="/feed" onclick = "window.location = '/feed'">Feed Page</a>
+                                    <a href="">Message</a>
+                                    <a href="/logout" onclick = "window.location = '/logout'">Log Out</a>
+                                </div>
+                            </div>
     </nav>
     <div id="community">
         <div class="subjects">
+            <h1 onclick = "window.location='/feedChat?chat_id=math'">#Math</h1>
             <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">
-                <span style="float:left" class="navbar-toggler-icon"></span>
-            </button>
-            <h1 onclick = "window.location='/feedChat?chat_id=math'">#Math</h1> 
+                <span style="float:left" class="navbar-toggler-icon">↓</span>
+            </button> 
             <div id="demo" class="collapse">
                 <p id="lolz">AP Calculus</p>
                 <p>Calculus AB</p>
@@ -53,10 +64,10 @@
         <hr>
         <div id="community">
                 <div class="subjects">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#esh">
-                        <span style="float:left" class="navbar-toggler-icon"></span>
-                    </button>
                     <h1 onclick = "window.location='/feedChat?chat_id=science'">#Science</h1> 
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#esh">
+                        <span style="float:left" class="navbar-toggler-icon">↓</span>
+                    </button>
                     <div id="esh" class="collapse">
                         <p id="eshs">AP Chemistry</p>
                         <p>AP Bio</p>
@@ -67,10 +78,10 @@
         <hr>
         <div id="community">
                 <div class="subjects">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#no">
-                        <span style="float:left" class="navbar-toggler-icon"></span>
-                    </button>
                     <h1 onclick = "window.location='/feedChat?chat_id=history'">#History</h1> 
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#no">
+                        <span style="float:left" class="navbar-toggler-icon">↓</span>
+                    </button>
                     <div id="no" class="collapse">
                         <p id="lolz"> AP US History</p>
                         <p>AP Euro<p>
@@ -81,10 +92,10 @@
         <hr>
         <div id="community">
                 <div class="subjects">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#way">
-                        <span style="float:left" class="navbar-toggler-icon"></span>
-                    </button>
                     <h1 onclick = "window.location='/feedChat?chat_id=english'">#English</h1> 
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#way">
+                        <span style="float:left" class="navbar-toggler-icon">↓</span>
+                    </button>
                     <div id="way" class="collapse">
                         <p id="way"> AP Lit</p>
                         <p>AP English</p>
@@ -94,10 +105,12 @@
         <hr>
         <div id="community">
                 <div class="subjects">
-                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#Yelped">
-                        <span style="float:left" class="navbar-toggler-icon"></span>
-                    </button>
                     <h1>#Suggested</h1> 
+                    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#Yelped">
+                        <span style="float:left" class="navbar-toggler-icon">↓</span>
+                    </button>
+                    <br>
+                    <br>
                     <div id="Yelped" class="collapse">
                     <p id="Yelp">Python</p>
                     <p>Javascript</p>

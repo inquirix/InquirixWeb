@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="script.js" defer></script>
+        <link href="CSS/NAVTHEMAN.css" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src = "/JavaScript/questions.js" type="text/javascript" defer></script>
@@ -28,6 +29,16 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                 </div>
             </div>
+            <div class="dropdown">
+                                <button id="myBtn" class="dropbtn"><img id="godhelpMe" src="assets/5b175ab3090385b31cc5f04ef08f0fc3.png" onclick = "window.location='/userProfile'"></button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <a href="/signup" onclick = "window.location = '/signup'">Sign Up</a>
+                                    <a href="/homepage" onclick = "window.location = '/homepage'">Home Page</a>
+                                    <a href="/feed" onclick = "window.location = '/feed'">Feed Page</a>
+                                    <a href="">Message</a>
+                                    <a href="/logout" onclick = "window.location = '/logout'">Log Out</a>
+                                </div>
+                            </div>
         </nav>
 <!--End of Navigation.-->
 

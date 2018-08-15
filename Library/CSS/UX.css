@@ -76,7 +76,7 @@ hr{
 }
 #TickleMySickleCell{
     width: 620px;
-    height: 50px;
+    height: fit-content;
     padding: 10px;
     border: 5px solid black;
     margin:auto;
