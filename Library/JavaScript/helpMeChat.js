@@ -35,13 +35,13 @@ btn.addEventListener('click', () => {
         socket.emit('chat', { //Sends data down socket
             message : message.value,
             handle : handle,
-            chat_id: params.questionNum + handle
+            chat_id: params.questionNum + params.userId
         });
         message.value = "";
     }
 })
 
-socket.on(`${params.questionNum + handle}`, (data) => {
+socket.on(`${params.questionNum + params.userId}`, (data) => {
     output.innerHTML += `<p id = 'cmessage'><strong id = "name">${data.handle} : </strong> ${data.message} </p>`;
 })
 
