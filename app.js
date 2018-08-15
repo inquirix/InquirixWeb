@@ -217,12 +217,15 @@ app.get("/question", (req, res) => {
     if (req.cookies.user_id != undefined) {
         console.log(req.cookies.user_id);
         req.session.cookie.maxAge += (1000 * 50);
+        queryDB.getData('name', req.cookies.user_id).then((data) => {
+            res.render("HTML/question", {
+                questionNum: req.query.questionNum,
+                name : data
+            })
+        })   
     } else {
         res.redirect('/homepage')
     }
-    res.render("HTML/question", {
-        questionNum: req.query.questionNum
-    })
 })
 
 app.get("/feed", (req, res) => {
@@ -256,6 +259,10 @@ io.on('connection', (socket) => {
     console.log('User Socket Connection Created...' + socket.id)
 
     socket.on('chat' , (data) => { //Waits for 'chat' message to be sent
+        io.sockets.emit(data.chat_id, data);
+    })
+
+    socket.on('SOS', (data) => {
         io.sockets.emit(data.chat_id, data);
     })
 })
