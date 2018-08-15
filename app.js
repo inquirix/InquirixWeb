@@ -246,6 +246,10 @@ app.get('/userProfile', (req, res) => {
     }
 })
 
+app.get('/', (req, res) => {
+    res.redirect('/signup')
+})
+
 
 
 io.on('connection', (socket) => {
