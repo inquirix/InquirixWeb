@@ -188,6 +188,22 @@ app.get("/question", (req, res) => {
         console.log(req.cookies.user_id);
         req.session.cookie.maxAge += (1000 * 50);
         queryDB.getData('name', req.cookies.user_id).then((data) => {
+            // res.render("HTML/question", {
+            //     questionNum: req.query.questionNum,
+            //     name : data 
+            // })
+            res.redirect(`/questionc?questionNum=3&userId=${userId}`)
+        })   
+    } else {
+        res.redirect('/homepage')
+    }
+})
+
+app.get("/questionc", (req, res) => {
+    if (req.cookies.user_id != undefined) {
+        console.log(req.cookies.user_id);
+        req.session.cookie.maxAge += (1000 * 50);
+        queryDB.getData('name', req.cookies.user_id).then((data) => {
             res.render("HTML/question", {
                 questionNum: req.query.questionNum,
                 name : data 
