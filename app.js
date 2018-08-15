@@ -35,35 +35,6 @@ app.use(session({
 const server = app.listen(3000, (err) => {
     if (err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
-
-    // // Testing verifyUser funtion
-    // // Should return true
-    // queryDB.verifyUser('98835', 'Jeremy').then((data) => {
-    //     console.log(data);
-    // })
-    // //Should return false
-    // queryDB.verifyUser('14231', 'JIMMY NUETRON').then((data) => {
-    //     console.log(data);
-    // })
-    // //testing get data function (should return array of data)
-    // queryDB.getData('name email password bio', 1).then((data) => {
-    //     console.log(data);
-    // });
-
-    // //testing storeData funtion (should send an Okpacket to DB and log "done")
-    // queryDB.storeData('name password email join_date user_id', "'Jeremy'  '123456' 'dude@mail.com' NOW() NULL", 'users').then(() => {
-    //     console.log("done");
-    // })
-
-    // //Testing changeData function (should send an Okpacket to DB and log "done")
-    // queryDB.changeData('name password', "'Donald' 'IamBigGay'", "name = 'Jeremy'", "users").then(() => {
-    //     console.log('done');
-    // })
-
-    // queryDB.getId("'98835'", "'Dale'").then((data) => {
-    //     console.log(data);
-    // })
-
 })
 
 const io = socket(server);
@@ -254,6 +225,24 @@ app.get('/feedChat', (req, res) => {
         res.redirect('/homepage')
     }
 })
+
+
+app.get('/userProfile', (req, res) => {
+    console.log('Cookies: ', req.cookies);
+    if (req.cookies.user_id != undefined) {
+        console.log(req.cookies.user_id);
+        req.session.cookie.maxAge += (1000 * 50);
+        queryDB.getData("name", req.cookies.user_id).then((data) => {
+            res.render('HTML/UX', {
+                userName : data
+            });
+        })
+    } else {
+        res.redirect('/homepage')
+    }
+})
+
+
 
 io.on('connection', (socket) => {
     console.log('User Socket Connection Created...' + socket.id)
