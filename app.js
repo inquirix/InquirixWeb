@@ -204,7 +204,11 @@ app.get("/feed", (req, res) => {
     if (req.cookies.user_id != undefined) {
         console.log(req.cookies.user_id);
         req.session.cookie.maxAge += (1000 * 50);
-        res.render("HTML/Feed")
+        queryDB.getData("name", req.cookies.user_id).then((data) => {
+            res.render("HTML/Feed", {
+                userName : data
+            });
+        })  
     } else {
         res.redirect('/homepage')
     }
