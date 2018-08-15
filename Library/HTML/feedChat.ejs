@@ -10,7 +10,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="script.js" defer></script>
-    <link href="../CSS/HomePage.css" rel="stylesheet">
+    <script src="/JavaScript/chat.js" defer></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <link href="../CSS/feedChat.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -30,6 +32,12 @@
     <hr class="my-4">
 
 <div class="container-fluid padding">
-
+<h1 id = "handle"><%= userName %></h1>
+<h2 id = "chatName">Chat</h2>
+    <div id = "chatBox">
+    <div id="output"></div>
+    </div>
+    <input id="message" type="text" placeholder="Message" />
+    <button id="send">Send</button>
 </body>
 </html>
