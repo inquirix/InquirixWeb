@@ -129,7 +129,7 @@ app.get('/homepage', function(req, res) {
 });
 
 
-app.get('/', function(req, res) {
+app.get('/signup', function(req, res) {
     console.log('Cookies: ', req.cookies);
     res.render('HTML/Signup', {
         title: 'Form Validation',
