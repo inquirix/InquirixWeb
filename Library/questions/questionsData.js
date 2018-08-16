@@ -43,8 +43,8 @@ const data = {
            {  
             "type" : "math",  
                "questionTitle" : "Multi-plane visualization #01", 
-                "questionAnswer" : "idk",
-               "question" : "Sequence An for non-negative integer n is such that",
+                "questionAnswer" : "9",
+               "question" : "The diagram above represents the ocean elevations of three different oceans, Indian ocean, Pacific Ocean and Atlantic Ocean. What is the total elevation for all three?",
                "graphType" : "surface",
                "graphData" : z1 = [
                 [8.83,8.89,8.81,8.87,8.9,8.87],
