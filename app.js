@@ -262,15 +262,8 @@ app.get('/userProfile', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.redirect('/signup')
-})
-
-
-app.get('/logout', (req, res) => {
-    res.clearCookie('user_id');
     res.redirect('/homepage')
 })
-
 
 io.on('connection', (socket) => {
     console.log('User Socket Connection Created...' + socket.id)
