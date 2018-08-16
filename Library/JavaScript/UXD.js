@@ -10,13 +10,49 @@ fetch(url[linkRandomizer]).then(function(Response){
     console.log();
 });
 
-// fetch(url[linkRandomizer]).then(function(Response){
-//     return Response.json();
-// }).then(function(myJson){
-//     if(myJson.results[randomizer].correct_answer == "True" || myJson.results[randomizer].correct_answer == "False"){
-//         let selectedDiv = document.getElementById("TickelMySickleCell");
+fetch(url[linkRandomizer]).then(function(Response){
+    return Response.json();
+}).then(function(myJson){
+    let selectedDiv = document.getElementById("TickelMySickleCell");
+    if(myJson.results[randomizer].correct_answer == "True" || myJson.results[randomizer].correct_answer == "False"){
+        let truth = createElement("input");
+        let fake = createElement("input");
+        truth.type = "radio";
+        fake.type = "radio";
+        truth.innerText = "True";
+        fake.innerText = "False";
+        selectedDiv.appendChild(truth);
+        selectedDiv.appendChild(fake);
+    }else {
+        let arr = [];
+        let newRand = Math.floor(Math.random() * 3);
+        let zero = createElement("input");
+        let one= createElement("input");
+        let two = createElement("input");
+        let three = createElement("input");
+        zero.type = "radio";
+        one.type = "radio";
+        two.type = "radio";
+        three.type = "radio";
+        for(let  i = 0; i < 3; i++){
+            arr[i] += myJson.results[randomizer].incorrect_answers
+        }
+        arr.splice(0, newRand);
 
-//     }
+        for(let i = 0; i < arr.length; i++ ){
+            i.innerText = arr[i];
+        }
+
+        selectedDiv.appendChild(zero);
+        selectedDiv.appendChild(one);
+        selectedDiv.appendChild(two);
+        selectedDiv.appendChild(three);
+        console.log(zero);
+        console.log(one);
+        console.log(two);
+        console.log(three);
+    }
+
     
-// });
+});
 
