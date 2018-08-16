@@ -179,7 +179,7 @@
     }
 
   .helpMe {
-      background-color: rgba(155,155,155,0.95); /* Green */
+      background-color: transparent; /* Green */
       border: none;
       color: white;
       padding: 15px 32px;

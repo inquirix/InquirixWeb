@@ -67,7 +67,7 @@ html,body{
 }
 .dropbtn {
             background-image: url("icons/settings-icon.png");
-            background: #aeaba9;
+            background: transparent;
             color: white;
             padding: 10px;
             font-size: 10px;
