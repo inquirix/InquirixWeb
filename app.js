@@ -32,7 +32,7 @@ app.use(session({
 }))
 
 
-const server = app.listen(3000, (err) => {
+const server = app.listen(process.env.PORT || 3000, (err) => {
     if (err) return new Error('Something went wrong!')
     console.log('App is running... listening on port 3000')
 })
