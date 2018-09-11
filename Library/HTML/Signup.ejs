@@ -91,11 +91,11 @@
                                         <h1>Sign Up</h1>
                                         <div class="inputz">
                                         <form action="submit" method="POST" >
-                                            <label>Username</label><br>
-                                            <input id="Potter" type = "text" name = "username">
+                                            <label>Username (Usernames should not include spaces)</label><br>
+                                            <input pattern="[a-zA-Z0-9]*" id="Potter" type = "text" name = "username">
                                             <br>
-                                            <label>Name</label><br>
-                                            <input id="Potter" type = "text" name = "name">
+                                            <label>Name (Names should not include spaces)</label><br>
+                                            <input pattern="[a-zA-Z0-9]*" id="Potter" type = "text" name = "name">
                                             <br>
                                             <label>Email</label><br>
                                             <input id="Potter" type = "text" name = "email">

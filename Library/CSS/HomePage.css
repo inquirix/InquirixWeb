@@ -165,6 +165,24 @@
       font-size: 4em;
       padding: 2rem;
     }
+  }
+
+  @media (max-width: 992px) {
+    #imagesText > p {
+      font-size: 20px;
+      padding: 20px;
+    }   
+  }
+
+  @media (max-width: 992px) {
+    #images > img {
+      height: 250px;
+      width: 250px;
+      padding: 20px;
+    }
   
     }
+
+    
+    
 
