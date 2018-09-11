@@ -2,9 +2,9 @@
   "name": "inquirix",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node start.js"
   },
   "author": "Jeremy, Kwaku, Fayeem",
   "license": "ISC",

@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-    host: '10.67.71.7',
+    host: 'https://lucky-turkey-93.localtunnel.me',
     user: 'root',
     password: '98835Piggy98835!',
     database: 'inquirix'
@@ -260,3 +260,4 @@ exports.verifyEmail = (email) => {
          
     })
 }
+
